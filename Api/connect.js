@@ -1,7 +1,7 @@
-let mySql = require('mysql')
+let mySql = require('mysql2')
 
 
-var mainConnection = mySql.createConnection(
+var mainConnection = mySql.createPool(
     {
         host: '127.0.0.1',
         user: 'root',
@@ -9,11 +9,7 @@ var mainConnection = mySql.createConnection(
     }
 )
 
-mainConnection.connect(() => {
-    // if (err) throw err;
-    console.log("Connected!");
-})
 
 
 
-module.exports = mainConnection;
+module.exports = mainConnection.promise();

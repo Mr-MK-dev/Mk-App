@@ -1,11 +1,14 @@
 let connection = require('../connect');
 
 exports.getPosts = (req, res) => {
-    sql = "SELECT * FROM posts;";
-    connection.query(sql, function (err, rows, fileds) {
-        if (err) throw err;
-        res.send(rows)
-    });
+  connection.execute('select * from posts')
+    .then(result=>{
+        res.json({
+            result
+        })
+    })
+    .catch(err=>{console.log(err);})
+
 }
 exports.postPost = (req, res) => {
     sql = "INSERT INTO posts values ('null',?)";
